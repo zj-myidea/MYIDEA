@@ -1,0 +1,124 @@
+
+
+
+a = {state:{ip:1,hostname:2,states:{cpu:[1,2,3],mem:[1,2,3],c:[1,2,3],d:[1,2,3],e:[1,2,3]}}}
+
+arr = []
+m = a.state.states
+i=0
+
+for (let x in m){
+    ret={name:x,date:m[x],type:'line',stack:'总量'}
+    arr[i]=ret
+    i++
+}
+
+console.log(arr,typeof(arr))
+sss = []
+console.log(typeof(sss))
+
+// componentDidUpdate(props){
+//     var myChart = echarts.init(document.getElementById('main'));
+//     myChart.setOption({
+//         title: {
+//             text: this.props.service.state.ip +'  '+ this.props.service.state.hostname
+//         },
+//         tooltip: {
+//             trigger: 'axis'
+//         },
+//         legend: {
+//             data:Object.keys(this.props.service.state.states)
+//         },
+//         grid: {
+//             left: '3%',
+//             right: '4%',
+//             bottom: '3%',
+//             containLabel: true
+//         },
+//         toolbox: {
+//             feature: {
+//                 saveAsImage: {}
+//             }
+//         },
+//         xAxis: {
+//             type: 'category',
+//             boundaryGap: false,
+//             data: this.props.service.state.states.date
+//         },
+//         yAxis: {
+//             type: 'value'
+//         },
+//         series: this.values(this.props.service.state.states)
+//     });
+// }
+
+let arr=[]
+        let i = 0
+        for (let x in m) {
+            if (x!='date'){
+                var ret = { name:x, type:'line', stack:'总量', data: m[x] }
+                arr[i] = ret
+                i++
+            }
+                
+        }
+        console.log(arr,"~~~~~~~~~~~",typeof(arr))
+        return arr
+
+
+
+        export default class Myline extends React.Component {
+            constructor(props) {
+                super(props)
+                const { match: { params } } = props
+                props.service.show(params.id)
+        
+            }
+            values = (m) => {
+                let arr=[]
+                let i = 0
+                for (let x in m) {
+                    if (x!='date'){
+                        var ret = { name:x, type:'line', stack:'总量', data: m[x] }
+                        arr[i] = ret
+                        i++
+                    }
+                        
+                }
+                
+                return arr
+            }
+            componentDidUpdate(props) {
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption({
+                    title: {
+                        text: this.props.service.sta.ip + '  ' + this.props.service.sta.hostname
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: Object.keys(this.props.service.sta.states)
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: this.props.service.sta.states.date
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: this.values(this.props.service.sta.states)
+                });
+            }

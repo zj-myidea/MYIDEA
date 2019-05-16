@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    欢迎你<h1>{{context}}</h1>
+    <ul>
+        {% for k, v in dct.items%}
+        {% if forloop.counter|divisibleby:'2' %}
+        <li style="color: red">{{k}} {{v}}</li>
+        {% else %}
+        <li style="color: blue">{{k}} {{v}}</li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
