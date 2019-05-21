@@ -13,7 +13,7 @@ import traceback
 
 from .ezpymysql import Connection
 from .pool_manager import UrlPool
-from .utils import downloader, clea_url
+from .utils import downloader, clea_url, init_file_logger
 from .config import *
 
 
@@ -26,7 +26,7 @@ class NewsCrawlerSync:
             db_user,
             db_password
         )
-        self.logger = fn.init_file_logger(name + '.log')
+        self.logger = init_file_logger(name + '.log')
         self.urlpool = UrlPool(name)
         self.hub_hosts = None
         self.load_hubs()
@@ -79,7 +79,7 @@ class NewsCrawlerSync:
         return goodlinks
 
     def process(self, url, ishub):
-        status, html, redirected_url = fn.downloader(url)
+        status, html, redirected_url = downloader(url)
         self.urlpool.set_status(url, status)
         if redirected_url != url:
             self.urlpool.set_status(redirected_url, status)

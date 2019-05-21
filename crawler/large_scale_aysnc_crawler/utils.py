@@ -10,6 +10,7 @@ from urllib.parse import urlunparse, urlparse
 import requests
 import tldextract
 import cchardet
+import logging
 
 def downloader(url, timeout=10, headers=None, debug=False, binary=False):
     ua_list = [
@@ -92,6 +93,17 @@ def clea_url(url:str):
         '',
     ))
     return url
+
+def init_file_logger(name):
+    logger = logging.getLogger(name)
+    logger.setLevel(20)
+    fhandler = logging.FileHandler('./{}'.format(name))
+    fhandler.setLevel(20)
+    fmt = logging.Formatter(fmt = "%(asctime)s %(name)s %(funcName)s %(message)s")
+    fhandler.setFormatter(fmt)
+    logger.addHandler(fhandler)
+    logger.propagate = True
+    return logger
 
 
 
